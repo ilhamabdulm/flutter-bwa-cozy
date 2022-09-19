@@ -1,3 +1,6 @@
+import 'package:cozy_app/pages/home.dart';
+import 'package:cozy_app/themes/colors.dart';
+import 'package:cozy_app/themes/typhography.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,13 +10,66 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        bottom: false,
+        child: Stack(
           children: [
-            Image.asset(
-              'assets/images/cozy-logo.png',
-              width: 50,
-            ),
-            Text('Find Cozy House to Stay and Happy')
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset('assets/images/cozy-splash.png')),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 30,
+                top: 30,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/cozy-logo.png'))),
+                    width: 50,
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Find Cozy House\nto Stay and Happy',
+                    style: blackTextStyle.copyWith(fontSize: 24),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Stop membuang banyak waktu \npada tempat yang tidak habitable',
+                    style: greyTextStyle.copyWith(fontSize: 16),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    height: 50,
+                    width: 210,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: primaryPurple,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18))),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        },
+                        child: Text(
+                          'Explore Now',
+                          style: whiteTextStyle.copyWith(fontSize: 18),
+                        )),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
