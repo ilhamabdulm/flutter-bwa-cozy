@@ -20,21 +20,24 @@ class StarBadge extends StatelessWidget {
             color: primaryPurple,
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25))),
         child: Center(
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Image.asset(
-              'assets/icons/icon-star-orange.png',
-              width: 22,
-            ),
-            SizedBox(
-              width: this.rating != '' ? 2 : 0,
-            ),
-            this.rating != ''
-                ? Text(
-                    this.rating,
-                    style: whiteTextStyle.copyWith(fontSize: 13),
-                  )
-                : Container()
-          ]),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/icons/icon-star-orange.png',
+                  width: 20,
+                ),
+                SizedBox(
+                  width: this.rating != '' ? 2 : 0,
+                ),
+                this.rating != ''
+                    ? Text(
+                        this.rating,
+                        style: whiteTextStyle.copyWith(fontSize: 13),
+                      )
+                    : Container()
+              ]),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/models/space.dart';
+import 'package:cozy_app/models/tip.dart';
 
 List listOfCity = [
   City(image: 'assets/images/cozy-city-1.png', name: 'Jakarta'),
@@ -27,4 +28,15 @@ List listOfSpace = [
       price: 20,
       location: 'Jakarta, Indonesia',
       rating: '3/5')
+];
+
+List listOfTip = [
+  Tip(
+      imageUrl: 'assets/images/cozy-tips-1.png',
+      name: 'City Guidelines',
+      lastUpdated: 'Updated 20 Apr'),
+  Tip(
+      imageUrl: 'assets/images/cozy-tips-2.png',
+      name: 'Jakarta Fairship',
+      lastUpdated: 'Updated 11 Dec'),
 ];

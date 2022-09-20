@@ -1,9 +1,9 @@
 import 'package:cozy_app/data/dummy.dart';
-import 'package:cozy_app/models/city.dart';
 import 'package:cozy_app/themes/typhography.dart';
+import 'package:cozy_app/widgets/bottom_navbar_item.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';
-import 'package:cozy_app/widgets/star_badge.dart';
+import 'package:cozy_app/widgets/tips_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,9 +12,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.all(24),
+        padding: EdgeInsets.symmetric(horizontal: 24),
         child: ListView(
           children: [
+            const SizedBox(
+              height: 24,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -22,7 +25,7 @@ class HomePage extends StatelessWidget {
                   'Explore Now',
                   style: blackTextStyle.copyWith(fontSize: 24),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 2,
                 ),
                 Text(
@@ -31,7 +34,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -41,14 +44,14 @@ class HomePage extends StatelessWidget {
                   'Popular Cities',
                   style: regularTextStyle,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Container(
                   height: 150,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    separatorBuilder: ((context, index) => SizedBox(
+                    separatorBuilder: ((context, index) => const SizedBox(
                           width: 20,
                         )),
                     itemCount: listOfCity.length,
@@ -59,7 +62,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -69,7 +72,7 @@ class HomePage extends StatelessWidget {
                   'Recommended Space',
                   style: regularTextStyle,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Column(
@@ -80,17 +83,66 @@ class HomePage extends StatelessWidget {
                               SpaceCard(
                                 space: listOfSpace[index],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               )
                             ],
                           )),
                 )
               ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Tips & Guidance',
+                  style: regularTextStyle,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Column(
+                  children: List.generate(
+                      listOfTip.length,
+                      (index) => Column(
+                            children: [
+                              TipsCard(
+                                tip: listOfTip[index],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              )
+                            ],
+                          )),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 74,
             )
           ],
         ),
       )),
+      floatingActionButton: Container(
+        height: 65,
+        width: MediaQuery.of(context).size.width - (2 * 24),
+        decoration: BoxDecoration(
+            color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(23)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            BottomNavbarItem(
+                icon: 'assets/icons/icon-home-active.png', isActive: true),
+            BottomNavbarItem(
+                icon: 'assets/icons/icon-mail.png', isActive: false),
+            BottomNavbarItem(
+                icon: 'assets/icons/icon-card.png', isActive: false),
+            BottomNavbarItem(
+                icon: 'assets/icons/icon-love.png', isActive: false)
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
