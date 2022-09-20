@@ -1,4 +1,5 @@
 import 'package:cozy_app/models/space.dart';
+import 'package:cozy_app/pages/detail.dart';
 import 'package:cozy_app/themes/typhography.dart';
 import 'package:cozy_app/widgets/star_badge.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,10 @@ class SpaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (() {}),
+      onTap: (() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DetailPage()));
+      }),
       child: Row(
         children: [
           ClipRRect(

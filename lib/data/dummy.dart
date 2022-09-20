@@ -15,19 +15,19 @@ List listOfSpace = [
       name: 'Kuretakeso Hott',
       price: 52,
       location: 'Bandung, Germany',
-      rating: '4/5'),
+      rating: 4),
   Space(
       image: 'assets/images/cozy-space-2.png',
       name: 'Roemah Nenek',
       price: 11,
       location: 'Seattle, Bogor',
-      rating: '5/5'),
+      rating: 5),
   Space(
       image: 'assets/images/cozy-space-1.png',
       name: 'Darrling How',
       price: 20,
       location: 'Jakarta, Indonesia',
-      rating: '3/5')
+      rating: 4)
 ];
 
 List listOfTip = [

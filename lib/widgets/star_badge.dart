@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:cozy_app/themes/colors.dart';
 
 class StarBadge extends StatelessWidget {
-  const StarBadge({super.key, this.rating = ''});
+  const StarBadge({super.key, this.rating = 0});
 
-  final String rating;
+  final int rating;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class StarBadge extends StatelessWidget {
                   width: 20,
                 ),
                 SizedBox(
-                  width: this.rating != '' ? 2 : 0,
+                  width: this.rating != 0 ? 2 : 0,
                 ),
-                this.rating != ''
+                this.rating != 0
                     ? Text(
-                        this.rating,
+                        '$rating/5',
                         style: whiteTextStyle.copyWith(fontSize: 13),
                       )
                     : Container()

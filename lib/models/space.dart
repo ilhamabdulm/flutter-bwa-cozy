@@ -4,7 +4,7 @@ class Space {
   String image;
   int price;
   String location;
-  String rating;
+  int rating;
 
   Space(
       {this.id = 0,
@@ -12,5 +12,5 @@ class Space {
       this.image = '',
       this.location = '',
       this.price = 0,
-      this.rating = ''});
+      this.rating = 0});
 }
