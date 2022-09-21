@@ -11,10 +11,10 @@ class StarBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: this.rating != '' ? 130 : 120,
+      width: this.rating != 0 ? 130 : 120,
       alignment: Alignment.topRight,
       child: Container(
-        width: this.rating != '' ? 70 : 50,
+        width: this.rating != 0 ? 70 : 50,
         height: 30,
         decoration: BoxDecoration(
             color: primaryPurple,

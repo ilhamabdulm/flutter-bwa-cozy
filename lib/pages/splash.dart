@@ -1,6 +1,7 @@
 import 'package:cozy_app/pages/home.dart';
 import 'package:cozy_app/themes/colors.dart';
 import 'package:cozy_app/themes/typhography.dart';
+import 'package:cozy_app/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(
                 left: 30,
-                top: 30,
+                top: 50,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,25 +49,15 @@ class SplashScreen extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  Container(
-                    height: 50,
-                    width: 210,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: primaryPurple,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18))),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
-                        },
-                        child: Text(
-                          'Explore Now',
-                          style: whiteTextStyle.copyWith(fontSize: 18),
-                        )),
-                  ),
+                  PrimaryButton(
+                      label: 'Explore Now',
+                      width: 210,
+                      action: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      })
                 ],
               ),
             )

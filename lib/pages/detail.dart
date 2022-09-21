@@ -1,10 +1,13 @@
 import 'dart:developer';
 
+import 'package:cozy_app/pages/error.dart';
 import 'package:cozy_app/themes/colors.dart';
 import 'package:cozy_app/themes/typhography.dart';
 import 'package:cozy_app/widgets/facility_item.dart';
+import 'package:cozy_app/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class DetailPage extends StatelessWidget {
   final List listofImage = [
@@ -22,6 +25,16 @@ class DetailPage extends StatelessWidget {
       path: phoneNumber,
     );
     await launchUrl(launchUri);
+  }
+
+  Future<void> _launchInWebViewOrVC(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.inAppWebView,
+    )) {
+      log('LOST AREA');
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -240,7 +253,22 @@ class DetailPage extends StatelessWidget {
                                     ],
                                   ),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        const url =
+                                            'https://blog.logrocket.com';
+                                        if (await canLaunchUrlString(url)) {
+                                          await launchUrlString(
+                                            url,
+                                          ); //forceWebView is true now
+                                        } else {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: ((context) {
+                                            return ErrorPage();
+                                          })));
+                                          // throw 'Could not launch $url';
+                                        }
+                                      },
                                       icon: Icon(
                                         Icons.pin_drop,
                                         color: Colors.grey,
@@ -251,25 +279,13 @@ class DetailPage extends StatelessWidget {
                               const SizedBox(
                                 height: 24,
                               ),
-                              Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width -
-                                    (2 * 24),
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: primaryPurple,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18))),
-                                    onPressed: () {
-                                      _makePhoneCall('6281385784854');
-                                    },
-                                    child: Text(
-                                      'Book Now',
-                                      style:
-                                          whiteTextStyle.copyWith(fontSize: 18),
-                                    )),
-                              ),
+                              PrimaryButton(
+                                  label: 'Book Now',
+                                  width: MediaQuery.of(context).size.width -
+                                      (2 * 24),
+                                  action: () {
+                                    _makePhoneCall('6281385784854');
+                                  })
                             ],
                           ),
                         ]),
