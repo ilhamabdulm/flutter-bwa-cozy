@@ -254,20 +254,15 @@ class DetailPage extends StatelessWidget {
                                   ),
                                   IconButton(
                                       onPressed: () async {
-                                        const url =
-                                            'https://blog.logrocket.com';
-                                        if (await canLaunchUrlString(url)) {
-                                          await launchUrlString(
-                                            url,
-                                          ); //forceWebView is true now
-                                        } else {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: ((context) {
-                                            return ErrorPage();
-                                          })));
-                                          // throw 'Could not launch $url';
-                                        }
+                                        String url =
+                                            'https://goo.gl/maps/spgtrfYwgeVotQGp7';
+                                        await canLaunch(url)
+                                            ? launch(url)
+                                            : Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: ((context) =>
+                                                        ErrorPage())));
                                       },
                                       icon: Icon(
                                         Icons.pin_drop,
