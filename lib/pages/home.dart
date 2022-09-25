@@ -1,14 +1,21 @@
+import 'dart:developer';
+
 import 'package:cozy_app/data/dummy.dart';
+import 'package:cozy_app/models/space.dart';
+import 'package:cozy_app/providers/space_providers.dart';
 import 'package:cozy_app/themes/typhography.dart';
 import 'package:cozy_app/widgets/bottom_navbar_item.dart';
 import 'package:cozy_app/widgets/city_card.dart';
 import 'package:cozy_app/widgets/space_card.dart';
 import 'package:cozy_app/widgets/tips_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var spaceProvider = Provider.of<SpaceProvider>(context);
+
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -75,20 +82,36 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                Column(
-                  children: List.generate(
-                      listOfSpace.length,
-                      (index) => Column(
-                            children: [
-                              SpaceCard(
-                                space: listOfSpace[index],
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              )
-                            ],
-                          )),
-                )
+                FutureBuilder(
+                    future: spaceProvider.getRecommendedSpaces(),
+                    builder: ((context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.hasData) {
+                          List<Space> data = snapshot.data;
+
+                          return Column(
+                            children: List.generate(
+                                data.length,
+                                (index) => Column(
+                                      children: [
+                                        SpaceCard(
+                                          space: data[index],
+                                        ),
+                                        const SizedBox(
+                                          height: 30,
+                                        )
+                                      ],
+                                    )),
+                          );
+                        } else {
+                          return Text('error');
+                        }
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    })),
               ],
             ),
             Column(

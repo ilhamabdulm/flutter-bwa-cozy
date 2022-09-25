@@ -14,7 +14,11 @@ class SpaceCard extends StatelessWidget {
     return InkWell(
       onTap: (() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DetailPage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailPage(
+                      space: space,
+                    )));
       }),
       child: Row(
         children: [
@@ -22,8 +26,8 @@ class SpaceCard extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(18)),
             child: Stack(
               children: [
-                Image.asset(
-                  space.image,
+                Image.network(
+                  space.imageUrl,
                   width: 130,
                   height: 110,
                   fit: BoxFit.cover,
@@ -58,10 +62,15 @@ class SpaceCard extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              Text(
-                space.location,
-                style: greyTextStyle.copyWith(fontSize: 14),
-              )
+              Text.rich(TextSpan(
+                  text: space.city,
+                  style: greyTextStyle.copyWith(fontSize: 14),
+                  children: [
+                    TextSpan(
+                      text: ', ${space.country}',
+                      style: greyTextStyle.copyWith(fontSize: 14),
+                    )
+                  ]))
             ],
           )
         ],
